@@ -20,13 +20,15 @@ for i in input {
         }
        
     }
-let answer01a = count
-let answer01b: Int
+let answer1 = count
+print("1.puzzle answer is \(answer1).")
+
+let answer2: Int
 let searchNumber = -1
 if let index = parenthesisToNumber.firstIndex(of: searchNumber) {
-    answer01b = index + 1
-    print("01b.puzzle answer is \(answer01b).")
+    answer2 = index + 1
+    print("2.puzzle answer is \(answer2).")
 }
 
-print("01a.puzzle answer is \(answer01a).")
+
 
