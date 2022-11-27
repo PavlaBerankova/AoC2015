@@ -64,3 +64,4 @@ for i in ribbon {
 print("2.puzzle answer is \(sum2).")
 
 
+
