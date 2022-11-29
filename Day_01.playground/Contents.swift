@@ -1,47 +1,46 @@
-import Foundation
 import Cocoa
 
-var input = [Character]()
+var input = ""
 
 if let filepath = Bundle.main.path(forResource: "input01", ofType: "txt") {
     do {
-        let content = try! Character(filepath)
+        var content = try String(contentsOfFile: filepath)
         input.append(content)
-        
-
+    } catch {
+        //contents could not loaded
     }
+} else {
+    print("File not found")
 }
 
-var data = input.compactMap { String($0) }
-print(data)
+func part1() {
+    let upFloor = input.filter({ $0 == "(" }).count
+    let downFloor = input.filter({ $0 == ")" }).count
+    let currentFloor = upFloor - downFloor
+    print("Result of part one is \(currentFloor).")
+}
 
-var count = 0
-
-let parenthesIsOpen = ("(")
-let parenthesIsEnd = (")")
-
-// transfer parenthesis to array number
-var parenthesisToNumber = [Int]()
-
-for i in input {
-        if parenthesIsOpen.contains(i) {
-            count += 1
-            parenthesisToNumber.append(count)
-        } else if parenthesIsEnd.contains(i) {
-            count -= 1
-            parenthesisToNumber.append(count)
+func part2() {
+    var bracketToNumber = [Int]()
+    var count = 0
+    let bracketOpen = ("(")
+    let bracketEnd = (")")
+    for i in input {
+            if bracketOpen.contains(i) {
+                count += 1
+                bracketToNumber.append(count)
+            } else if bracketEnd.contains(i) {
+                count -= 1
+                bracketToNumber.append(count)
+            }
         }
-       
+    if let index = bracketToNumber.firstIndex(of: -1) {
+        print("Result of part two is \(index + 1).")
     }
-let answer1 = count
-print("1.puzzle answer is \(answer1).")
-
-let answer2: Int
-let searchNumber = -1
-if let index = parenthesisToNumber.firstIndex(of: searchNumber) {
-    answer2 = index + 1
-    print("2.puzzle answer is \(answer2).")
 }
+
+part1()
+part2()
 
 
 
